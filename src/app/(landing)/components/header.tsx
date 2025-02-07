@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="w-full flex items-center justify-between font-sans px-16 py-4 pt-8">
+    <div className="w-full flex items-center justify-between font-sans px-8 py-4">
       <h1 className="font-bold text-xl">Thomas Los</h1>
       <NavigationMenu>
         <NavigationMenuList>
