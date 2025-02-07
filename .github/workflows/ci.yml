@@ -29,16 +29,13 @@ jobs:
       - name: Build Next.js app
         run: pnpm run build
 
-      - name: SFTP-Deploy-Action
-        uses: milanmk/actions-file-deployer@master
+      - name: Deploy to Server via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          remote-protocol: sftp
-
-          # Credentials for SFTP access to server using GitHub secrets
-          remote-host: ${{ secrets.FTP_SERVER }}
-          remote-user: ${{ secrets.FTP_USERNAME }}
-          remote-password: ${{ secrets.FTP_PASSWORD }}
-
-          # Path for specific folder on server for files deployment
-          remote-path: /test
-          remote-port: 22
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: sftp
+          port: 22
+          server-dir: /test/
+          local-dir: ./out/
