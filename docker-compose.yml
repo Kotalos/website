@@ -1,0 +1,18 @@
+services:
+  nextjs:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nextjs
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs.entrypoints=http"
+      - "traefik.http.routers.nextjs.rule=Host(`kotalos.localhost`)"
+      - "traefik.http.services.nextjs.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: true
