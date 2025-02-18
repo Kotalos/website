@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Experience() {
     return (
         <div className="bg-white">
@@ -26,9 +28,9 @@ export default function Experience() {
                             expertise.
                         </p>
                         <div className="mt-8 flex items-center justify-start gap-x-6">
-                            <a href="#" className="text-sm/3 font-semibold text-gray-900">
+                            <Link href="#" className="text-sm/3 font-semibold text-gray-900">
                                 Learn more <span aria-hidden="true">→</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="aspect-square w-full h-full">
@@ -42,20 +44,20 @@ export default function Experience() {
                             Mobility Europe and North America. Availability April to August
                         </p>
                         <div className="flex space-x-4 w-full mt-4 justify-end">
-                            <a
+                            <Link
                                 href="https://www.linkedin.com/in/thomas-los/"
                                 className="rounded bg-slate-950 px-4 py-2 text-white hover:bg-slate-200 hover:text-slate-950"
                             >
                                 Contact
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="https://www.linkedin.com/in/thomas-los/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded border border-2 border-slate-950 px-4 py-2 text-slate-950 hover:border-slate-200 hover:bg-slate-200"
                             >
                                 IN
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
