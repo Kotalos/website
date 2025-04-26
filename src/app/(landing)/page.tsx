@@ -37,30 +37,6 @@ export default function Experience() {
                         <img src={`/imgs/profile.png`} className="w-full h-full aspect-square object-cover scale-x-[-1]" />
                     </div>
                 </div>
-                <div className="mx-auto max-w-2xl mt-12">
-                    <div className="rounded-lg w-3/4 border border-gray-200 bg-white p-6 shadow-m">
-                        <h2 className="text-2xl font-bold">Looking for a 5 months Internship</h2>
-                        <p className="text-gray-600">
-                            Mobility Europe and North America. Availability April to August
-                        </p>
-                        <div className="flex space-x-4 w-full mt-4 justify-end">
-                            <Link
-                                href="https://www.linkedin.com/in/thomas-los/"
-                                className="rounded bg-slate-950 px-4 py-2 text-white hover:bg-slate-200 hover:text-slate-950"
-                            >
-                                Contact
-                            </Link>
-                            <Link
-                                href="https://www.linkedin.com/in/thomas-los/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="rounded border border-2 border-slate-950 px-4 py-2 text-slate-950 hover:border-slate-200 hover:bg-slate-200"
-                            >
-                                IN
-                            </Link>
-                        </div>
-                    </div>
-                </div>
 
                 <div
                     aria-hidden="true"

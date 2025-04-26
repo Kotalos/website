@@ -10,7 +10,6 @@ export default function LandingLayout({ children }: LandingLayoutProps) {
     <div className="min-h-screen">
       <Header />
       <main>{children}</main>
-      {/* Add your footer or other common elements here */}
     </div>
   );
 }

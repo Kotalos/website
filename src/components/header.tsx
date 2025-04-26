@@ -38,10 +38,12 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="#"
-            className="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+            href="https://www.linkedin.com/in/thomas-los/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded border border-2 border-slate-950 px-4 py-2 text-slate-950 hover:border-slate-200 hover:bg-slate-200"
           >
-            Contact
+            LinkedIn
           </Link>
         </div>
       </nav>
