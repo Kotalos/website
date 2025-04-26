@@ -8,7 +8,7 @@ services:
 
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.website.rule=Host(`kotalos.localhost`) || Host(`kotalos.com`) || Host(`sphynx.kotalos.com`)"
+      - "traefik.http.routers.website.rule=Host(`resume.kotalos.com`)"
       - "traefik.http.routers.website.entrypoints=web"
       - "traefik.http.services.website.loadbalancer.server.port=3000"
 
