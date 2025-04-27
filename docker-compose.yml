@@ -9,7 +9,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.website.rule=Host(`resume.kotalos.com`)"
-      - "traefik.http.routers.website.entrypoints=web"
+      - "traefik.http.routers.website.entrypoints=websecure"
+      - "traefik.http.routers.website.tls.certresolver=letsencrypt"
       - "traefik.http.services.website.loadbalancer.server.port=3000"
 
 networks:
