@@ -1,19 +1,16 @@
 # Base stage for building the application
-FROM node:18-alpine AS builder
+FROM node:23-alpine AS builder
 WORKDIR /app
 
-# Install pnpm and dependencies
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && \
-	pnpm install --frozen-lockfile && \
-	npm uninstall -g npm
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 # Copy source code and build the application
 COPY . .
 RUN pnpm build
 
 # Production stage
-FROM node:18-alpine AS runner
+FROM node:23-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
@@ -24,17 +21,13 @@ COPY --from=builder /app/public ./public
 
 # Install pnpm and production dependencies, setup security
 RUN npm install -g pnpm && \
-	pnpm install --prod --frozen-lockfile && \
-	npm uninstall -g npm && \
-	addgroup --system --gid 1001 nodejs && \
-	adduser --system --uid 1001 nextjs
+    pnpm install --prod --frozen-lockfile && \
+    npm uninstall -g pnpm && \
+    rm -rf /root/.npm /root/.pnpm-store /root/.cache
 
 # Set correct permissions
-RUN chown -R nextjs:nodejs .
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 -G nodejs
 USER nextjs
 
-# Expose Next.js default port
 EXPOSE 3000
-
-# Start the application
 CMD ["pnpm", "start"]
