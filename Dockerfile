@@ -31,4 +31,4 @@ RUN addgroup -g 1001 -S nodejs && \
 USER nodejs:nodejs
 
 EXPOSE 3000
-CMD ["node", "./server.js"]
+CMD ["node", "server.js", "-H", "0.0.0.0"]
