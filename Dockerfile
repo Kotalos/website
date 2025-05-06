@@ -1,33 +1,34 @@
-# Base stage for building the application
-FROM node:23-alpine AS builder
+# Build stage
+FROM node:20.12.2-alpine3.18 AS build
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Copy source code and build the application
+# Use pnpm for deterministic, clean installs
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile
 COPY . .
+
+# Build with standalone output
 RUN pnpm build
 
-# Production stage
-FROM node:23-alpine AS runner
-WORKDIR /app
+# Production stage - use much smaller base image
+FROM node:20.12.2-alpine3.18 AS production
 ENV NODE_ENV=production
+WORKDIR /app
 
-# Copy built assets and dependencies from builder
-COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
+# Copy the standalone output (includes server.js)
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
 
-# Install pnpm and production dependencies, setup security
-RUN npm install -g pnpm && \
-    pnpm install --prod --frozen-lockfile && \
-    npm uninstall -g pnpm && \
-    rm -rf /root/.npm /root/.pnpm-store /root/.cache
+# Security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001 && \
+    chown -R nodejs:nodejs /app
 
-# Set correct permissions
-RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 -G nodejs
-USER nextjs
+USER nodejs:nodejs
 
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["node", "./server.js"]
