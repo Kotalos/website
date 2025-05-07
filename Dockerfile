@@ -16,6 +16,10 @@ RUN pnpm build
 # Production stage - use much smaller base image
 FROM node:20.12.2-alpine3.18 AS production
 ENV NODE_ENV=production
+# Set hostname to localhost so URLs display nicely
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 
 # Copy the standalone output (includes server.js)
@@ -31,4 +35,4 @@ RUN addgroup -g 1001 -S nodejs && \
 USER nodejs:nodejs
 
 EXPOSE 3000
-CMD ["node", "server.js", "-H", "0.0.0.0"]
+CMD ["node", "server.js"]
