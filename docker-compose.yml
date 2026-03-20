@@ -1,10 +1,9 @@
 services:
   website:
-    container_name: website
     image: ghcr.io/kotalos/website:main
     networks:
       - dokploy-network
-    restart: unless-stopped
+    restart: always
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.website.rule=Host(`resume.kotalos.com`)"
