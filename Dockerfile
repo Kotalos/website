@@ -1,9 +1,8 @@
 # Build stage
-FROM node:20.12.2-alpine3.18 AS build
+FROM node:25-alpine3.22 AS build
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm@latest
 
 # Use pnpm for deterministic, clean installs
 COPY package.json pnpm-lock.yaml* ./
